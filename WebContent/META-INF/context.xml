@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+
+	<!-- <WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<WatchedResource>${catalina.base}/conf/web.xml</WatchedResource> -->
+<!-- 
+	<Resource name="jdbc/94"
+		auth="Container"
+		type="javax.sql.DataSource"
+		factory="org.objectweb.jotm.datasource.DataSourceFactory"
+		validationQuery="SELECT 1"
+		maxActive="30"
+		minIdle="2"
+		maxWait="10000"
+		initialSize="10"
+		defaultAutoCommit="false"
+		username="casp"
+		password=""
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://10.79.57.94/cqdb"/>
+
+	<Resource name="jdbc/229"
+		auth="Container"
+		type="javax.sql.DataSource"
+		factory="org.objectweb.jotm.datasource.DataSourceFactory"
+		validationQuery="SELECT 1"
+		maxActive="30"
+		minIdle="2"
+		maxWait="10000"
+		initialSize="10"
+		defaultAutoCommit="false"
+		username="casp"
+		password=""
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://172.25.96.229/cqdb"/>
+	 -->
+
+<!-- 
+	<Resource name="jdbc/94"
+		auth="Container"
+		type="org.postgresql.xa.PGXADataSource"
+		factory="org.postgresql.xa.PGXADataSourceFactory"
+		validationQuery="SELECT 1"
+		maxActive="30"
+		minIdle="2"
+		maxWait="10000"
+		initialSize="10"
+		defaultAutoCommit="false"
+		user="casp"
+		username="casp"
+		password=""
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://10.79.57.94/cqdb"
+		serverName="10.79.57.94"
+		databaseName="cqdb"/>
+
+	<Resource name="jdbc/229"
+		auth="Container"
+		type="org.postgresql.xa.PGXADataSource"
+		factory="org.postgresql.xa.PGXADataSourceFactory"
+		validationQuery="SELECT 1"
+		maxActive="30"
+		minIdle="2"
+		maxWait="10000"
+		initialSize="10"
+		defaultAutoCommit="false"
+		user="casp"
+		username="casp"
+		password=""
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://172.25.96.229/cqdb"
+		serverName="172.25.96.229"
+		databaseName="cqdb"/>
+	
+
+
+
+	<Resource
+    name="TransactionSynchronizationRegistry"
+    auth="Container"
+    type="javax.transaction.TransactionSynchronizationRegistry"
+    factory="org.objectweb.jotm.TransactionSynchronizationRegistryFactory"/>
+
+	<Transaction factory="org.objectweb.jotm.UserTransactionFactory" jotm.timeout="60" />
+-->
+
+
+
+<!-- 
+	<Resource
+		auth="Container" 
+		factory="org.objectweb.jotm.TransactionSynchronizationRegistryFactory"
+		name="TransactionSynchronizationRegistry" type="javax.transaction.TransactionSynchronizationRegistry" />
+ 
+    <Resource
+    	auth="Container"
+    	factory="org.objectweb.jotm.UserTransactionFactory"
+    	jotm.timeout="600"
+    	name="jta/UserTransaction"
+    	type="javax.transaction.UserTransaction" />
+-->
+    	
+<!-- 
+	<Resource name="jdbc/94"
+		auth="Container"
+		type="javax.sql.DataSource"
+		factory="org.simplejta.tm.jdbc.SimpleJTADataSourceFactory"
+		validationQuery="SELECT 1"
+		maxActive="30"
+		minIdle="2"
+		maxWait="10000"
+		initialSize="10"
+		defaultAutoCommit="false"
+		username="casp"
+		password=""
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://10.79.57.94/cqdb"/>
+
+	<Resource name="jdbc/229"
+		auth="Container"
+		type="javax.sql.DataSource"
+		factory="org.simplejta.tm.jdbc.SimpleJTADataSourceFactory"
+		validationQuery="SELECT 1"
+		maxActive="30"
+		minIdle="2"
+		maxWait="10000"
+		initialSize="10"
+		defaultAutoCommit="false"
+		username="casp"
+		password=""
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://172.25.96.229/cqdb"/>
+
+	<Transaction factory="org.simplejta.tm.ut.SimpleUserTransactionFactory" jotm.timeout="60" />
+
+ 
+    <Resource
+    	auth="Container"
+    	factory="org.simplejta.tm.ut.SimpleUserTransactionFactory"
+    	jotm.timeout="600"
+    	name="jta/UserTransaction"
+    	type="javax.transaction.UserTransaction" />
+ -->
+
+
+
+
+
+
+
+
+
+	<Transaction factory="com.atomikos.icatch.jta.UserTransactionFactory" />
+    
+    <Resource name="jdbc/94"
+    auth="Container"
+    type="com.atomikos.jdbc.AtomikosDataSourceBean"
+    factory="com.jasongj.jta.util.EnhancedTomcatAtomikosBeanFactory"
+    uniqueResourceName="DataSource_Resource94"
+    minPoolSize="2"
+    maxPoolSize="8"
+    testQuery="SELECT 1"
+    xaDataSourceClassName="org.postgresql.xa.PGXADataSource"
+    xaProperties.databaseName="cqdb"
+    xaProperties.serverName="10.79.57.94"
+    xaProperties.portNumber="5432"
+    xaProperties.user="casp"
+    xaProperties.password=""/>
+
+    <Resource name="jdbc/229"
+    auth="Container"
+    type="com.atomikos.jdbc.AtomikosDataSourceBean"
+    factory="com.jasongj.jta.util.EnhancedTomcatAtomikosBeanFactory"
+    uniqueResourceName="DataSource_Resource229"
+    minPoolSize="2"
+    maxPoolSize="8"
+    testQuery="SELECT 1"
+    xaDataSourceClassName="org.postgresql.xa.PGXADataSource"
+    xaProperties.databaseName="cqdb"
+    xaProperties.serverName="172.25.96.229"
+    xaProperties.portNumber="5432"
+    xaProperties.user="casp"
+    xaProperties.password=""/>	
+
+
+
+
+
+
+
+
+
+</Context>

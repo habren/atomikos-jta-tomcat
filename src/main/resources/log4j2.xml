@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="OFF" packages="com.cisco.rest.audit">
+	<appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} [%L] %msg%n" />
+		</Console>
+	</appenders>
+	<loggers>
+		<root level="info">
+			<appender-ref ref="console" />
+		</root>
+	</loggers>
+</configuration>
