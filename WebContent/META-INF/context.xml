@@ -163,7 +163,7 @@
     testQuery="SELECT 1"
     xaDataSourceClassName="org.postgresql.xa.PGXADataSource"
     xaProperties.databaseName="cqdb"
-    xaProperties.serverName="10.79.57.94"
+    xaProperties.serverName="192.168.0.1"
     xaProperties.portNumber="5432"
     xaProperties.user="casp"
     xaProperties.password=""/>
@@ -178,7 +178,7 @@
     testQuery="SELECT 1"
     xaDataSourceClassName="org.postgresql.xa.PGXADataSource"
     xaProperties.databaseName="cqdb"
-    xaProperties.serverName="10.79.57.39"
+    xaProperties.serverName="192.168.0.2"
     xaProperties.portNumber="5432"
     xaProperties.user="casp"
     xaProperties.password=""/>	
