@@ -153,11 +153,11 @@
 
 	<Transaction factory="com.atomikos.icatch.jta.UserTransactionFactory" />
     
-    <Resource name="jdbc/94"
+    <Resource name="jdbc/1"
     auth="Container"
     type="com.atomikos.jdbc.AtomikosDataSourceBean"
     factory="com.jasongj.jta.util.EnhancedTomcatAtomikosBeanFactory"
-    uniqueResourceName="DataSource_Resource94"
+    uniqueResourceName="DataSource_Resource1"
     minPoolSize="2"
     maxPoolSize="8"
     testQuery="SELECT 1"
@@ -168,17 +168,17 @@
     xaProperties.user="casp"
     xaProperties.password=""/>
 
-    <Resource name="jdbc/229"
+    <Resource name="jdbc/2"
     auth="Container"
     type="com.atomikos.jdbc.AtomikosDataSourceBean"
     factory="com.jasongj.jta.util.EnhancedTomcatAtomikosBeanFactory"
-    uniqueResourceName="DataSource_Resource229"
+    uniqueResourceName="DataSource_Resource2"
     minPoolSize="2"
     maxPoolSize="8"
     testQuery="SELECT 1"
     xaDataSourceClassName="org.postgresql.xa.PGXADataSource"
     xaProperties.databaseName="cqdb"
-    xaProperties.serverName="172.25.96.229"
+    xaProperties.serverName="10.79.57.39"
     xaProperties.portNumber="5432"
     xaProperties.user="casp"
     xaProperties.password=""/>	

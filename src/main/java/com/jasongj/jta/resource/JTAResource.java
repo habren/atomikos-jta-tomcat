@@ -16,9 +16,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/jta")
 public class JTAResource {
+  private static final Logger LOGGER = LoggerFactory.getLogger(JTAResource.class);
 
   @GET
   public String test(@PathParam(value = "commit") boolean isCommit)
@@ -28,49 +31,34 @@ public class JTAResource {
       Context context = new InitialContext();
       userTransaction = (UserTransaction) context.lookup("java:comp/UserTransaction");
       userTransaction.setTransactionTimeout(600);
-//      userTransaction = com.arjuna.ats.jta.UserTransaction.userTransaction();
       
       userTransaction.begin();
+      
+      DataSource dataSource1 = (DataSource) context.lookup("java:comp/env/jdbc/1");
+      Connection xaConnection1 = dataSource1.getConnection();
+      
+      DataSource dataSource2 = (DataSource) context.lookup("java:comp/env/jdbc/2");
+      Connection xaConnection2 = dataSource2.getConnection();
+      LOGGER.info("Connection autocommit : {}", xaConnection1.getAutoCommit());
 
-      
-      DataSource dataSource229 = (DataSource) context.lookup("java:comp/env/jdbc/229");
-      Connection xaConnection229 = dataSource229.getConnection();
-//      XAResource xaResource229 = xaConnection229.getXAResource();
-      System.out.println("Autocommit : " + xaConnection229.getAutoCommit());
-      
-      DataSource dataSource94 = (DataSource) context.lookup("java:comp/env/jdbc/94");
-      Connection xaConnection94 = dataSource94.getConnection();
-//      XAResource xaResource94 = xaConnection94.getXAResource();
-
-//      Transaction transaction = userTransaction.getTransaction();
-//      transaction.enlistResource(xaResource94);
-//      transaction.enlistResource(xaResource229);
-      
-      
-//      Connection connection94 = xaConnection94.getConnection();
-      Statement st94 = xaConnection94.createStatement();
-      
-//      Connection connection229 = xaConnection229.getConnection();
-      Statement st229 = xaConnection229.createStatement();
-      System.out.println("Autocommit : " + xaConnection229.getAutoCommit());
-      
-      st94.execute("create table casp.test94(qtime timestamptz, value integer)");
-
-      st229.execute("create table casp.test229(qtime timestamptz, value integer)");
-      System.out.println("Autocommit : " + xaConnection229.getAutoCommit());
+      Statement st1 = xaConnection1.createStatement();
+      Statement st2 = xaConnection2.createStatement();
+      LOGGER.info("Connection autocommit after created statement: {}", xaConnection1.getAutoCommit());
       
 
+      st1.execute("update casp.test set qtime=current_timestamp, value = 1");
+      st2.execute("update casp.test set qtime=current_timestamp, value = 2");
+      LOGGER.info("Autocommit after execution : ", xaConnection1.getAutoCommit());
 
-//      userTransaction.rollback();
       userTransaction.commit();
-      System.out.println("Autocommit : " + xaConnection229.getAutoCommit());
+      LOGGER.info("Autocommit after commit: ",  xaConnection1.getAutoCommit());
       return "commit";
 
     } catch (Exception ex) {
       if (userTransaction != null) {
         userTransaction.rollback();
       }
-      ex.printStackTrace();
+      LOGGER.info(ex.toString());
       throw new WebApplicationException("failed", ex);
     }
   }
